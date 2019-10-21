@@ -2,6 +2,25 @@ package com.company;
 
 public class YahtzeeEvaluator {
 
+    public int getRollScore(Roll roll){
+        //TODO player should choose
+        if (isYatzy(roll.getRollArray())){
+            return 50;
+        } else if (isBigStraight(roll.getRollArray())){
+            return 40;
+        }else if (isSmallStraight(roll.getRollArray())){
+            return 30;
+        } else if (isFullHouse(roll.getRollArray())){
+            return 25;
+        }
+
+
+        else {
+            return getRollSum(roll.getRollArray());
+        }
+
+
+    }
 
     public static int getRollSum(int[] roll) {
         int sum = 0;
@@ -14,7 +33,7 @@ public class YahtzeeEvaluator {
     public static boolean isYatzy(int[] roll) {
         int sameCounter = 0;
         for (int i = 0; i < 4; i++) {
-            if (roll[i] == roll[i + 1]) {
+            if (roll[0] == roll[i + 1]) {
                 sameCounter++;
             }
         }
@@ -39,6 +58,7 @@ public class YahtzeeEvaluator {
         }
     }
 
+    //TODO change to proper small straight
     public static boolean isSmallStraight(int[] roll) {
         int straightCounter = 0;
         for (int i = 0; i < 4; i++) {
@@ -53,11 +73,40 @@ public class YahtzeeEvaluator {
         }
     }
 
-    public static boolean isFullHouse() {
-        return false;
+    public static boolean isFullHouse(int[] roll) {
+        int sameCounter = 0;
+        for (int i = 0; i < 4; i++) {
+            if (roll[i] == roll[i + 1]) {
+                sameCounter++;
+            }
+        }
+        if (sameCounter == 3 && ((roll[1] != roll[2]) || (roll[2] != roll[3]))) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
-    public static boolean isFourOfAKind() {
-        return false;
+    public static boolean isFourOfAKind(int[] roll) {
+        int sameCounter = 0;
+        for (int i = 0; i < 4; i++) {
+            if (roll[i] == roll[i + 1]) {
+                sameCounter++;
+            }
+        }
+        if (sameCounter == 3 && !((roll[1] != roll[2]) || (roll[2] != roll[3]))) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public static boolean isThreeOfAKind(int[] roll){
+        if ((roll[0] == roll[1] && roll[1] == roll[2]) || (roll[1] == roll[2] && roll[2] == roll[3]) ||
+                (roll[2] == roll[3] && roll[3] == roll[4])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
