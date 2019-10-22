@@ -18,4 +18,9 @@ public class Roll {
         java.util.Arrays.sort(rollArray);
         return rollArray;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Roll: %d, %d, %d, %d, %d", rollArray[0], rollArray[1], rollArray[2], rollArray[3], rollArray[4]);
+    }
 }

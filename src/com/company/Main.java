@@ -3,6 +3,14 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+
+        YahtzeeProgram yahtzee = new YahtzeeProgram();
+        yahtzee.play();
+
+//        Player p1 = new Player("Magnus");
+//        yahtzee.rollMenu(p1);
+
+        /*
         Roll roll = new Roll();
         roll.rollDice();
 
@@ -23,8 +31,6 @@ public class Main {
         if (YahtzeeEvaluator.isSmallStraight(testInput)){
             System.out.println("Small straight");
         }
-
-
-	// write your code here
+        */
     }
 }
