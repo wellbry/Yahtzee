@@ -41,7 +41,15 @@ public class View {
         for(Score score: player.getScores()){
             System.out.println(score.toString());
         }
-        System.out.printf("%15s %5d\n", "Total", player.getTotalScore());
+        System.out.printf("%15s %5d\n\n", "Total", player.getTotalScore());
     }
 
+    public void printString(String string){
+        System.out.println(string);
+    }
+
+    public String readString(){
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 }

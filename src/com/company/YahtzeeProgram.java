@@ -8,24 +8,43 @@ public class YahtzeeProgram {
     View view = View.getInstance();
 
     public void play(){
-        players.add(new Player("Magnus"));
-        //view.displayPlayerScores(players.get(0));
+//        players.add(new Player("Magnus"));
+        addPlayers();
 
-
-
-        for (int i = 0; i < ScoreBox.values().length; i++){ //TODO one too many? should be right
+        for (int i = 0; i < ScoreBox.values().length; i++){
             for (Player player:players) {
                 roller.rollDice();
-                System.out.println(roller.toString());
+                view.printString(String.format("\n%s\'s turn:\n%s",player.getName(), roller.toString()));
                 rollMenu(player);
             }
         }
         for (Player player:players) {
             view.displayPlayerScores(player);
         }
+        view.printString("Enter anything to quit");
+        view.readString();
     }
 
-    public void rollMenu(Player player){
+    private void addPlayers(){
+        view.printString("Enter number of players");
+        int numberOfPlayers = 0;
+        boolean numberOfPlayersOk = false;
+        while (!numberOfPlayersOk) {
+            try {
+                numberOfPlayers = Integer.parseInt(view.readString());
+                numberOfPlayersOk = true;
+            } catch (Exception e){
+                view.printString("Must be a number. Try again.");
+            }
+        }
+        for (int i = 0; i < numberOfPlayers; i++){
+            view.printString("Enter player " + (i + 1) + " name:");
+            String playerName = view.readString();
+            players.add(new Player(playerName));
+        }
+    }
+
+    private void rollMenu(Player player){
         ScoreBox menuChoice = null;
         boolean validChoice = false;
         while (!validChoice){
